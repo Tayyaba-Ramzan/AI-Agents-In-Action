@@ -6,6 +6,7 @@ def fetch_user_data()->list:
     """
     fetch function for user data and return list
     """
+    print("data fetched")
     url="https://jsonplaceholder.typicode.com/users"
     res=requests.get(url)
     return res.json()
@@ -15,7 +16,8 @@ def fetch_user_dat_by_id(id:int)->list:
     """
     fetch function for user data and return list
     """
-    url=f"https://jsonplaceholder.typicode.com/users{id}"
+    print ("data fetch by id")
+    url=f"https://jsonplaceholder.typicode.com/users/{id}"
     res=requests.get(url)
     return res.json()
 
