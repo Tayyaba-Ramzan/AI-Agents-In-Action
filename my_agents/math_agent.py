@@ -6,10 +6,12 @@ from my_tools.user_data_tool import fetch_user_data,fetch_user_dat_by_id
 from agents.agent import StopAtTools
 from agents.extensions.handoff_prompt import RECOMMENDED_PROMPT_PREFIX
 from my_tools.get_age_tools import get_age
+from instructions.dynamic_instruction import dynamic_instruction
+from user_data_type.user_data import UserDataType
 
-my_assistant=Agent(
+my_assistant=Agent[UserDataType](
     name="assistant",
-    instructions="you are a helpfull assistant",
+    instructions=dynamic_instruction,
     model=model,
     tools=[get_age]
     
