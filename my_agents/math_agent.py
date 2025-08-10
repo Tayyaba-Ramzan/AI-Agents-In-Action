@@ -8,14 +8,28 @@ from agents.extensions.handoff_prompt import RECOMMENDED_PROMPT_PREFIX
 from my_tools.get_age_tools import get_age
 from instructions.dynamic_instruction import dynamic_instruction
 from user_data_type.user_data import UserDataType
+from guardrial_function.guardrial_input_function import guardrial_input_function
+from guardrial_function.guardrial_output_function import guardrial_output_function
 
-my_assistant=Agent[UserDataType](
-    name="assistant",
-    instructions=dynamic_instruction,
-    model=model,
-    tools=[get_age]
-    
+hotel_assistant=Agent(
+    name="Hotel Customer Care Assistant",
+    instructions="""
+You are a helplfull Mehran Hotel customer care assistant your name is Akhter Riyaz.
+- Mehran Hotel owner name is Kazim Jabri.
+- Mehran Hotel Total rooms 191.
+- 20 rooms for not availabe for public it is only for special guest.
+""",
+model=model,
+input_guardrails=[guardrial_input_function],
+output_guardrails=[guardrial_output_function]
 )
+
+# my_assistant=Agent[UserDataType](
+#     name="assistant",
+#     instructions=dynamic_instruction,
+#     model=model,
+#     tools=[get_age]    
+# )
 
 # math_agent=Agent(
 #     name="math-agent",
