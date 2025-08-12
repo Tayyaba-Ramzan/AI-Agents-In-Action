@@ -11,13 +11,54 @@ from user_data_type.user_data import UserDataType
 from guardrial_function.guardrial_input_function import guardrial_input_function
 from guardrial_function.guardrial_output_function import guardrial_output_function
 from my_tools.math_tool import subtract
+from agents.extensions.handoff_prompt import RECOMMENDED_PROMPT_PREFIX
+from agents import handoff
+from service.service_function import service
+from user_data_type.user_data import MyInputData
+from my_tools.math_tool import weather_function
+from agents.extensions import handoff_filters
 
-assistant=Agent(
-    name="my_assistant",
-    instructions="you are a helpfull assistant",
+next_js_agent=Agent(
+    name="next_js_assistant",
+    instructions=f"""
+{RECOMMENDED_PROMPT_PREFIX}
+you are a helpfull assistant for next.js
+
+""",
     model=model,
-    tools=[subtract]
+    handoff_description="you are a next js assistant"
 )
+
+next_js=handoff(
+    agent=next_js_agent,
+    tool_name_override="next.js",
+    tool_description_override="you are a next js",
+    on_handoff=service,
+    input_type=MyInputData,
+    input_filter=handoff_filters.remove_all_tools,
+    is_enabled=True
+)
+
+python_assistant=Agent(
+    name="python_assistant",
+    instructions=f"""
+{RECOMMENDED_PROMPT_PREFIX}
+you are a helpufll assistant for python
+""",
+    model=model,
+    handoff_description="you are a python assistant",
+    handoffs=[next_js],
+    tools=[weather_function]
+)
+
+# print(python_assistant.handoffs)
+
+# assistant=Agent(
+#     name="my_assistant",
+#     instructions="you are a helpfull assistant",
+#     model=model,
+#     tools=[subtract]
+# )
 
 # hotel_assistant=Agent(
 #     name="Hotel Customer Care Assistant",

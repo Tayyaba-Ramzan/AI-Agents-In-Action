@@ -13,6 +13,11 @@ subtract=FunctionTool(
     is_enabled=True
 )
 
+@function_tool
+def weather_function(city:str):
+    """This is a weather funciton"""
+    return f"{city}: cloudly"
+
 @function_tool(name_override="sum",description_override="This is a sum tool",is_enabled=True)
 def add(n1:int,n2:int):
     """This is add funciton

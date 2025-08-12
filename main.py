@@ -2,15 +2,19 @@ from agents import Runner,set_tracing_disabled,InputGuardrailTripwireTriggered,O
 from user_data_type.user_data import UserDataType
 from my_agents.guardrial_agent import guardrial_agent
 # from my_agents.math_agent import hotel_assistant
-from my_agents.math_agent import assistant
+# from my_agents.math_agent import assistant
 import asyncio
+from my_agents.math_agent import python_assistant
 
 set_tracing_disabled(True)
 
 # session=SQLiteSession("user_3","conversation.db")
 
-result=Runner.run_sync(assistant,"15-5")
+result=Runner.run_sync(python_assistant,"what is next js and provide karachi weather")
 print(result.final_output)
+
+# result=Runner.run_sync(assistant,"15-5")
+# print(result.final_output)
 
 # async def main():
 #     await session.clear_session()

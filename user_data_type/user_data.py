@@ -1,6 +1,9 @@
 from dataclasses import dataclass
 from pydantic import BaseModel
 
+class MyInputData(BaseModel):
+    advice:str
+
 class SubDataType(BaseModel):
     n1:int
     n2:int
