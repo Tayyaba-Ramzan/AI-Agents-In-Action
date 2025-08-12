@@ -10,11 +10,13 @@ from instructions.dynamic_instruction import dynamic_instruction
 from user_data_type.user_data import UserDataType
 from guardrial_function.guardrial_input_function import guardrial_input_function
 from guardrial_function.guardrial_output_function import guardrial_output_function
+from my_tools.math_tool import subtract
 
 assistant=Agent(
     name="my_assistant",
     instructions="you are a helpfull assistant",
-    model=model
+    model=model,
+    tools=[subtract]
 )
 
 # hotel_assistant=Agent(

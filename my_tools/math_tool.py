@@ -1,6 +1,19 @@
-from agents import function_tool
+from agents import function_tool,FunctionTool,RunContextWrapper
+from user_data_type.user_data import SubDataType
 
-@function_tool
+async def subtract_function(ctx:RunContextWrapper,args):
+    obj=SubDataType.model_validate_json(args)
+    return f"your sub result is {obj.n1-obj.n2}"
+
+subtract=FunctionTool(
+    name="subtract_tool",
+    description="This is a subtract_tool",
+    params_json_schema=SubDataType.model_json_schema(),
+    on_invoke_tool=subtract_function,
+    is_enabled=True
+)
+
+@function_tool(name_override="sum",description_override="This is a sum tool",is_enabled=True)
 def add(n1:int,n2:int):
     """This is add funciton
     args:

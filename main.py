@@ -7,7 +7,10 @@ import asyncio
 
 set_tracing_disabled(True)
 
-session=SQLiteSession("user_3","conversation.db")
+# session=SQLiteSession("user_3","conversation.db")
+
+result=Runner.run_sync(assistant,"15-5")
+print(result.final_output)
 
 # async def main():
 #     await session.clear_session()
@@ -28,14 +31,14 @@ session=SQLiteSession("user_3","conversation.db")
 
 # asyncio.run(main())
 
-while True: 
-    prompt=input("Write Prompt Here:")
+# while True: 
+#     prompt=input("Write Prompt Here:")
 
-    if prompt=="exit":
-        break
+#     if prompt=="exit":
+#         break
 
-    res=Runner.run_sync(starting_agent=assistant,input=prompt,session=session)
-    print(res.final_output)
+#     res=Runner.run_sync(starting_agent=assistant,input=prompt,session=session)
+#     print(res.final_output)
 
 # user1=UserDataType("Muhammmad Hassan",27,"Software Engineer")
 

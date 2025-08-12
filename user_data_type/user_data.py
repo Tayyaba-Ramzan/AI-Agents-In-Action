@@ -1,6 +1,10 @@
 from dataclasses import dataclass
 from pydantic import BaseModel
 
+class SubDataType(BaseModel):
+    n1:int
+    n2:int
+
 @dataclass
 class UserDataType:
     name:str
